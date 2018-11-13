@@ -3,11 +3,12 @@
 
 # Данный скрипт позволяет установить "Вечный онлайн" на аккаунт.
 
-import time
-import datetime
 import requests
+from time import gmtime, strftime, sleep
 
-# Укажите в access_token токен (его можно получить например здесь https://vkhost.github.io/)
+# Укажите в access_token токен 
+# (его можно получить например здесь https://vkhost.github.io/)
+
 access_token = ""
 
 
@@ -27,18 +28,12 @@ def method(method, param={}, **kwargs):
 	return resp
 
 
-def get_time():
-	"""Получение текущего времени"""
-	return str(datetime.datetime.strftime(
-		datetime.datetime.now(), "%d.%m.%Y %H:%M:%S"))
-
-
 if __name__ == '__main__':
 	try:
 		while True:
-			print(get_time() + " Установлен статус Online")
 			method("account.setOnline")
-			time.sleep(300)
+			print(strftime("%d.%m.%Y %H:%M:%S") + " Установлен статус Online")
+			sleep(5)
 
 	except Exception as e:
 		print(e)
