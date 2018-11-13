@@ -33,7 +33,7 @@ if __name__ == '__main__':
 		while True:
 			method("account.setOnline")
 			print(strftime("%d.%m.%Y %H:%M:%S") + " Установлен статус Online")
-			sleep(5)
+			sleep(300)
 
 	except Exception as e:
 		print(e)
