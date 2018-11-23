@@ -12,18 +12,21 @@ from time import gmtime, strftime, sleep
 access_token = ""
 
 
-def method(method, param={}, **kwargs):
+def call(method, param={}, **kwargs):
 	"""Выполнение указанного метода"""
 	global access_token
 	param['access_token'] = access_token
 	param['v']:'5.89'
 	param.update(kwargs)
 
-	resp = requests.get("https://api.vk.com/method/" + method,
-	 params=param, timeout=10).json()
+	try:
+		resp = requests.get("https://api.vk.com/method/" + method,
+	 	 params=param, timeout=10).json()
+	except Exception as e:
+		raise e
 
 	if 'error' in resp:
-		print("#{error_code}: {error_msg}".format(**resp['error']))
+		raise Exception("Error #{error_code}: {error_msg}".format(**resp['error']))
 
 	return resp
 
@@ -31,7 +34,7 @@ def method(method, param={}, **kwargs):
 if __name__ == '__main__':
 	try:
 		while True:
-			method("account.setOnline")
+			call("account.setOnline")
 			print(strftime("%d.%m.%Y %H:%M:%S") + " Установлен статус Online")
 			sleep(300)
 
