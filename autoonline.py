@@ -16,7 +16,7 @@ def call(method, param={}, **kwargs):
 	"""Выполнение указанного метода"""
 	global access_token
 	param['access_token'] = access_token
-	param['v']:'5.89'
+	param['v']='5.89'
 	param.update(kwargs)
 
 	try:
